@@ -54,6 +54,7 @@ body{
   font-size: 32pt;
   margin: 0 25px 0 25px;
   margin-top: 330px;
+  cursor: pointer;
 }
 
 body{text-align: center;}
