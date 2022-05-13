@@ -61,6 +61,8 @@ export default function App() {
   };
 
   return (
+    <>
+    <button onClick={makeApiCall}>Pull Another Random User</button>
     <div id="container">
       <div style={styles} id="photo"></div>
       <div id="content">
@@ -93,5 +95,6 @@ export default function App() {
         </span>
       </div>
     </div>
+    </>
   );
 }
