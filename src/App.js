@@ -12,8 +12,7 @@ export default function App() {
     let date = new Date(data.results[0].dob.date);
     date = date.toDateString().slice(4,15);
     setUser({
-      firstName: data.results[0].name.first,
-      lastName: data.results[0].name.last,
+      name: `${data.results[0].name.first} ${data.results[0].name.last}`,
       email: data.results[0].email,
       birthDate: date,
       city: data.results[0].location.city,
@@ -25,7 +24,37 @@ export default function App() {
 
   useEffect(() => {makeApiCall()}, []);
 
-  const handleClick = () => {};
+  const handleClick = (e) => {
+    const smallText = document.getElementById('smalltext');
+    const bigText = document.getElementById('bigtext');
+    // console.log(e.target.id)
+    if (e.target.id === 'email') {
+      return (
+        smallText.innerText = 'My email is',
+        bigText.innerText = user.email
+      )
+    } else if (e.target.id === 'birthdate') {
+      return (
+        smallText.innerText = 'My birthday is',
+        bigText.innerText = user.birthDate
+      )
+    } else if (e.target.id === 'city') {
+      return (
+        smallText.innerText = 'I live in',
+        bigText.innerText = user.city
+      )
+    } else if (e.target.id === 'phone') {
+      return (
+        smallText.innerText = 'My phone number is',
+        bigText.innerText = user.phone
+      )
+    } else if (e.target.id === 'name') {
+      return (
+        smallText.innerText = 'My name is',
+        bigText.innerText = user.name
+      )
+    }
+  };
 
   const styles = {
     backgroundImage: `url(${user.imageUrl})`
@@ -36,7 +65,7 @@ export default function App() {
       <div style={styles} id="photo"></div>
       <div id="content">
         <span id="smalltext">My name is</span>
-        <span id="bigtext">{user.firstName}</span>
+        <span id="bigtext">{user.name}</span>
       </div>
       <div onClick={handleClick} className="attribute">
         <span id="name" role="img" aria-labelledby="face">
