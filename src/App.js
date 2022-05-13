@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './styles.css';
 
 export default function App() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
+  const [toggle, setToggle] = useState(true);
 
   const makeApiCall = async () => {
     const url = 'https://randomuser.me/api/';
@@ -19,10 +20,10 @@ export default function App() {
       phone: data.results[0].phone,
       imageUrl: data.results[0].picture.large
     })
-    // console.log(user);
   };
 
   useEffect(() => {makeApiCall()}, []);
+  useEffect(() => {makeApiCall()}, [toggle]);
 
   const handleClick = (e) => {
     const smallText = document.getElementById('smalltext');
@@ -62,7 +63,7 @@ export default function App() {
 
   return (
     <>
-    <button onClick={makeApiCall}>Pull Another Random User</button>
+    <button onClick={() => setToggle(!toggle)}>Pull Another Random User</button>
     <div id="container">
       <div style={styles} id="photo"></div>
       <div id="content">
