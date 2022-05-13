@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import './styles.css';
+import Photo from "./components/Photo.js";
+import Content from "./components/Content.js";
+import Name from "./components/Name.js";
+import Email from "./components/Email.js";
+import BirthDate from "./components/Birthdate.js";
+import City from "./components/City.js";
+import Phone from "./components/Phone.js";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -16,7 +23,7 @@ export default function App() {
       name: `${data.results[0].name.first} ${data.results[0].name.last}`,
       email: data.results[0].email,
       birthDate: date,
-      city: data.results[0].location.city,
+      city: `${data.results[0].location.city}, ${data.results[0].location.state}`,
       phone: data.results[0].phone,
       imageUrl: data.results[0].picture.large
     })
@@ -63,38 +70,17 @@ export default function App() {
 
   return (
     <>
-    <button onClick={() => setToggle(!toggle)}>Pull Another Random User</button>
+    <button onClick={() => setToggle(!toggle)}>
+      Pull Another Random User
+    </button>
     <div id="container">
-      <div style={styles} id="photo"></div>
-      <div id="content">
-        <span id="smalltext">My name is</span>
-        <span id="bigtext">{user.name}</span>
-      </div>
-      <div onClick={handleClick} className="attribute">
-        <span id="name" role="img" aria-labelledby="face">
-          😀
-        </span>
-      </div>
-      <div onClick={handleClick} className="attribute">
-        <span id="email" role="img" aria-labelledby="email">
-          📧
-        </span>
-      </div>
-      <div onClick={handleClick} className="attribute">
-        <span id="birthdate" role="img" aria-labelledby="confetti">
-          🎉
-        </span>
-      </div>
-      <div onClick={handleClick} className="attribute">
-        <span id="city" role="img" aria-labelledby="city">
-          🌆
-        </span>
-      </div>
-      <div onClick={handleClick} className="attribute">
-        <span id="phone" role="img" aria-labelledby="tele">
-          📞
-        </span>
-      </div>
+      <Photo styles={styles}/>
+      <Content name={user.name} />
+      <Name click={handleClick} />
+      <Email click={handleClick} />
+      <BirthDate click={handleClick} />
+      <City click={handleClick} />
+      <Phone click={handleClick} />
     </div>
     </>
   );
