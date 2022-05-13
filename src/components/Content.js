@@ -1,8 +1,8 @@
-const Content = ({name}) => {
+const Content = ({type, value}) => {
     return (
         <div id="content">
-            <span id="smalltext">My name is</span>
-            <span id="bigtext">{name}</span>
+            <span id="smalltext">My {type} is</span>
+            <span id="bigtext">{value}</span>
         </div>
     )
 }

@@ -10,6 +10,7 @@ import Phone from "./components/Phone.js";
 
 export default function App() {
   const [user, setUser] = useState({});
+  const [info, setInfo] = useState({});
   const [toggle, setToggle] = useState(true);
 
   const makeApiCall = async () => {
@@ -18,14 +19,18 @@ export default function App() {
     const data = await res.json();
     // console.log(data.results[0].name.first);
     let date = new Date(data.results[0].dob.date);
-    date = date.toDateString().slice(4,15);
+    date = date.toDateString().slice(4,10);
     setUser({
       name: `${data.results[0].name.first} ${data.results[0].name.last}`,
       email: data.results[0].email,
-      birthDate: date,
+      birthday: date,
       city: `${data.results[0].location.city}, ${data.results[0].location.state}`,
       phone: data.results[0].phone,
       imageUrl: data.results[0].picture.large
+    })
+    setInfo({
+      type: "name",
+      value: `${data.results[0].name.first} ${data.results[0].name.last}`
     })
   };
 
@@ -33,39 +38,37 @@ export default function App() {
   useEffect(() => {makeApiCall()}, [toggle]);
 
   const handleClick = (e) => {
-    const smallText = document.getElementById('smalltext');
-    const bigText = document.getElementById('bigtext');
     // console.log(e.target.id)
     if (e.target.id === 'email') {
-      return (
-        smallText.innerText = 'My email is',
-        bigText.innerText = user.email
-      )
-    } else if (e.target.id === 'birthdate') {
-      return (
-        smallText.innerText = 'My birthday is',
-        bigText.innerText = user.birthDate
-      )
+        setInfo({
+          type: e.target.id,
+          value: user.email
+        })
+    } else if (e.target.id === 'birthday') {
+      setInfo({
+        type: e.target.id,
+        value: user.birthday
+      })
     } else if (e.target.id === 'city') {
-      return (
-        smallText.innerText = 'I live in',
-        bigText.innerText = user.city
-      )
+      setInfo({
+        type: e.target.id,
+        value: user.city
+      })
     } else if (e.target.id === 'phone') {
-      return (
-        smallText.innerText = 'My phone number is',
-        bigText.innerText = user.phone
-      )
+      setInfo({
+        type: e.target.id,
+        value: user.phone
+      })
     } else if (e.target.id === 'name') {
-      return (
-        smallText.innerText = 'My name is',
-        bigText.innerText = user.name
-      )
+      setInfo({
+        type: e.target.id,
+        value: user.name
+      })
     }
   };
 
   const styles = {
-    backgroundImage: `url(${user.imageUrl})`
+    backgroundImage: user.imageUrl ? `url(${user.imageUrl})` : ''
   };
 
   return (
@@ -75,7 +78,7 @@ export default function App() {
     </button>
     <div id="container">
       <Photo styles={styles}/>
-      <Content name={user.name} />
+      <Content type={info.type} value={info.value} />
       <Name click={handleClick} />
       <Email click={handleClick} />
       <BirthDate click={handleClick} />
