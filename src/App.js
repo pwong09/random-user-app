@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './styles.css';
 
-function App() {
+export default function App() {
+  const handleClick = () => {};
+
+  const styles = {};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="container">
+      <div style={styles} id="photo"></div>
+      <div id="content">
+        <span id="smalltext">My name is Plato</span>
+        <span id="bigtext"></span>
+      </div>
+      <div onClick={handleClick} className="attribute">
+        <span id="name" role="img" aria-labelledby="face">
+          😀
+        </span>
+      </div>
+      <div onClick={handleClick} className="attribute">
+        <span id="email" role="img" aria-labelledby="email">
+          📧
+        </span>
+      </div>
+      <div onClick={handleClick} className="attribute">
+        <span id="birthdate" role="img" aria-labelledby="confetti">
+          🎉
+        </span>
+      </div>
+      <div onClick={handleClick} className="attribute">
+        <span id="city" role="img" aria-labelledby="city">
+          🌆
+        </span>
+      </div>
+      <div onClick={handleClick} className="attribute">
+        <span id="phone" role="img" aria-labelledby="tele">
+          📞
+        </span>
+      </div>
     </div>
   );
 }
-
-export default App;
